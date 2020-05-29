@@ -18,6 +18,7 @@ PDAL_ADD_PLUGIN(libname reader hdf
     INCLUDES
         ${ROOT_DIR}
         ${NLOHMANN_INCLUDE_DIR}
+        ${ARBITER_INCLUDE_DIR}
 )
 
 if (WITH_TESTS)
@@ -25,5 +26,6 @@ if (WITH_TESTS)
         FILES test/HdfReadertest.cpp
         LINK_WITH ${libname}
         INCLUDES
-            ${NLOHMANN_INCLUDE_DIR})
+            ${NLOHMANN_INCLUDE_DIR}
+            ${ARBITER_INCLUDE_DIR})
 endif()
