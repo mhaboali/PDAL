@@ -57,7 +57,12 @@ void Handler::initialize(
             m_arbiter.getLocalHandle(filename)));
         m_h5File.reset(new H5::H5File(m_handle->localPath(), H5F_ACC_RDONLY));
     }
-    catch (const H5::FileIException&)
+    catch (const std::exception& e)
+    {
+        throw pdal_error("Could not open HDF5 file '" + filename + "': " +
+            e.what());
+    }
+    catch (...)
     {
         throw pdal_error("Could not open HDF5 file '" + filename + "'.");
     }

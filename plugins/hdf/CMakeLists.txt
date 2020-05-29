@@ -26,6 +26,5 @@ if (WITH_TESTS)
         FILES test/HdfReadertest.cpp
         LINK_WITH ${libname}
         INCLUDES
-            ${NLOHMANN_INCLUDE_DIR}
-            ${ARBITER_INCLUDE_DIR})
+            ${NLOHMANN_INCLUDE_DIR})
 endif()
