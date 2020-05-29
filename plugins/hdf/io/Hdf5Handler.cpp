@@ -53,7 +53,9 @@ void Handler::initialize(
 {
     try
     {
-        m_h5File.reset(new H5::H5File(filename, H5F_ACC_RDONLY));
+        m_handle.reset(new arbiter::LocalHandle(
+            m_arbiter.getLocalHandle(filename)));
+        m_h5File.reset(new H5::H5File(m_handle->localPath(), H5F_ACC_RDONLY));
     }
     catch (const H5::FileIException&)
     {
@@ -80,6 +82,7 @@ void Handler::initialize(
 void Handler::close()
 {
     m_h5File->close();
+    m_handle.reset();
 }
 
 
@@ -125,7 +128,7 @@ DimInfo::DimInfo(
         // Sanity check before we cast from signed to unsigned
         if(dspace.getSelectNpoints() < 0)
             throw pdal_error("Selection had a negative number of points. "
-                "this should never happen, and it's probably a PDAL bug.");     
+                "this should never happen, and it's probably a PDAL bug.");
         m_numPoints = (hsize_t) dspace.getSelectNpoints();
 
         // check if dataset is 'chunked'

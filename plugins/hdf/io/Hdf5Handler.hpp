@@ -39,6 +39,7 @@
 #include <pdal/Log.hpp>
 #include "H5Cpp.h"
 #include <nlohmann/json.hpp>
+#include <arbiter/arbiter.hpp>
 
 #include <memory>
 #include <vector>
@@ -69,6 +70,9 @@ public:
     hsize_t getNumPoints();
 
 private:
+    arbiter::Arbiter m_arbiter;
+    std::unique_ptr<arbiter::LocalHandle> m_handle;
+
     std::vector<uint8_t> m_buffer;
     std::string m_name;
     Dimension::Type m_pdalType;
