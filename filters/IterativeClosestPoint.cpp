@@ -70,6 +70,7 @@ void IterativeClosestPoint::addArgs(ProgramArgs& args)
     args.add("max_similar",
              "Max number of similar transforms to consider converged",
              m_max_similar, 0);
+    m_maxdistArg = &args.add("max_dist", "Maximum correspondence distance", m_maxdist);
 }
 
 PointViewSet IterativeClosestPoint::run(PointViewPtr view)
@@ -140,6 +141,7 @@ PointViewPtr IterativeClosestPoint::icp(PointViewPtr fixed,
         fixed_idx.reserve(tempMovingTransformed->size());
         moving_idx.reserve(tempMovingTransformed->size());
         double mse(0.0);
+	double sqr_maxdist = m_maxdist * m_maxdist;
 
         // For every point in the centered, moving PointView, find the nearest
         // neighbor in the centered fixed PointView. Record the indices of each
@@ -155,6 +157,11 @@ PointViewPtr IterativeClosestPoint::icp(PointViewPtr fixed,
 
             // In the PCL code, there would've been a check that the square
             // distance did not exceed a threshold value.
+            if (m_maxdistArg->set())
+            {
+                if (sqr_dists[0] > sqr_maxdist)
+                    continue;
+            }
 
             // Store the indices of the correspondence and update the MSE.
             moving_idx.push_back(i);

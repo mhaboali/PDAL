@@ -53,6 +53,8 @@ private:
     double m_rotation_threshold;
     double m_translation_threshold;
     double m_mse_abs;
+    Arg *m_maxdistArg;
+    double m_maxdist;
 
     virtual void addArgs(ProgramArgs& args);
     virtual PointViewSet run(PointViewPtr view);
