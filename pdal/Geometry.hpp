@@ -36,6 +36,8 @@
 #include <pdal/Log.hpp>
 #include <pdal/PointRef.hpp>
 #include <pdal/SpatialReference.hpp>
+#include <gdal/cpl_conv.h>
+#include <gdal/cpl_string.h>
 
 #include <memory>
 

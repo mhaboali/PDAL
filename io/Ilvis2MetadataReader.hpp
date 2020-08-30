@@ -35,7 +35,7 @@
 #pragma once
 
 #include <pdal/Metadata.hpp>
-
+#include <gdal/cpl_conv.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <string>

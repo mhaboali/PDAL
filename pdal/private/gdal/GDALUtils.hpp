@@ -37,7 +37,7 @@
 #include <pdal/JsonFwd.hpp>
 #include <pdal/SpatialReference.hpp>
 #include <pdal/util/Bounds.hpp>
-
+#include <gdal/ogr_p.h>
 class OGRGeometry;
 typedef void *OGRGeometryH;
 class GDALDataset;
