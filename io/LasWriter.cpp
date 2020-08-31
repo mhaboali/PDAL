@@ -1102,8 +1102,11 @@ bool LasWriter::fillPointBuf(PointRef& point, LeInserter& ostream)
 
     ostream << point.getFieldAs<uint16_t>(Id::PointSourceId);
 
+    std::string stamp_str = m_filename.substr(0, m_filename.find('.')); 
+    double stamp = atof(stamp_str.c_str());
+
     if (m_lasHeader.hasTime())
-        ostream << point.getFieldAs<double>(Id::GpsTime);
+        ostream << stamp;
 
     if (m_lasHeader.hasColor())
     {
